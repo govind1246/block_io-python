@@ -134,7 +134,7 @@ class BlockIo(object):
                     unpad = lambda s : s[0:-s[-1]]
 
                 data = base64.b64decode(b64data) # decode from base64
-                obj = AES.new(key, AES.MODE_ECB, "")
+                obj = AES.new(key, AES.MODE_ECB)  # ECB mode doesn't require IV exception with pycrypto to pycryptodome upgrade.
                 message = unpad(obj.decrypt(data))
             except:
                 # error decrypting? must be an invalid secret pin
