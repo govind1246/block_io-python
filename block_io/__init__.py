@@ -110,7 +110,7 @@ class BlockIo(object):
             pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS)
             unpad = lambda s : s[0:-s[-1]]
 
-            obj = AES.new(key, AES.MODE_ECB, "")
+            obj = AES.new(key, AES.MODE_ECB) # ECB mode doesn't require IV exception with pycrypto to pycryptodome upgrade.
             ciphertext = obj.encrypt(pad(data))
 
             return base64.b64encode(ciphertext)
